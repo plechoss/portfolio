@@ -1,24 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import PhotosViewVue from '../views/PhotosView.vue'
+import AboutViewVue from '../views/AboutView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/AboutView.vue')
+      component: AboutViewVue
     },
     {
       path: '/photos',
       name: 'photos',
-      component: () => import('../views/PhotosView.vue')
-    },
-    {
-      path: '/instagram',
-      beforeEnter() {
-        location.href = 'http://www.instagram.com/plesk0t'
-      },
-      component: () => null
+      component: PhotosViewVue
     }
   ]
 })
