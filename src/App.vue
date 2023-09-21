@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import router from './router'
 import { useDisplay } from 'vuetify'
 
 const { xs, sm } = useDisplay()
+const isSmallScreen = computed(() => {
+  return xs.value || sm.value
+})
 
 const navDrawer = ref(false)
 const links = ref([
@@ -24,36 +27,36 @@ function goTo(path: string) {
 
 <template>
   <v-app>
-    <v-app-bar density="prominent" elevation="0" fluid>
-      <v-row align="center" justify="center" class="fill-height mt-0">
-        <v-spacer />
-        <v-col v-if="!(sm || xs)">
+    <v-app-bar :density="isSmallScreen ? 'default' : 'prominent'" elevation="0" fluid>
+      <v-row align="center" justify="center" class="fill-height my-0 px-4">
+        <v-spacer v-if="!isSmallScreen" />
+        <v-col v-if="!isSmallScreen">
           <span
             @click="goTo('/photos')"
-            class="text-button font-weight-bold text-grey-darken-2 nav-link"
+            class="text-caption font-weight-bold text-grey-darken-2 nav-link"
             >PHOTOS</span
           >
         </v-col>
-        <v-col>
-          <span @click="goTo('/photos')" class="text-h5 nav-link"> PLESKOWICZ </span>
+        <v-col :class="isSmallScreen ? 'text-left' : ''">
+          <span @click="goTo('/photos')" class="text-h6 nav-link"> PLESKOWICZ </span>
         </v-col>
-        <v-col v-if="!(sm || xs)">
+        <v-col v-if="!isSmallScreen">
           <span
             @click="goTo('/about')"
-            class="text-button text-grey-darken-2 font-weight-bold nav-link"
+            class="text-caption text-grey-darken-2 font-weight-bold nav-link"
             >ABOUT</span
           >
         </v-col>
         <v-spacer />
       </v-row>
       <template #append>
-        <v-app-bar-nav-icon v-if="xs || sm" @click="onNavigationDrawerButtonClick"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-if="isSmallScreen" @click="onNavigationDrawerButtonClick"></v-app-bar-nav-icon>
       </template>
     </v-app-bar>
     <v-main> <router-view> </router-view> </v-main>
     <v-navigation-drawer v-model="navDrawer" location="right" :disable-resize-watcher="true" floating>
       <v-list-item v-for="link in links" :key="link.name">
-        <span @click="goTo(link.to)" class="text-button nav-link"> {{ link.name }} </span>
+        <span @click="goTo(link.to)" class="text-button font-weight-bold nav-link"> {{ link.name }} </span>
       </v-list-item>
     </v-navigation-drawer>
   </v-app>

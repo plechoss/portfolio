@@ -4,7 +4,7 @@ import { useDisplay } from 'vuetify'
 
 const { xs, sm, md } = useDisplay()
 
-const numPhotos = ref(48)
+const numPhotos = ref(47)
 
 const cols = computed(() => {
   if (md.value) return 3
