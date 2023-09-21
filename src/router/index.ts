@@ -12,6 +12,13 @@ const router = createRouter({
       path: '/photos',
       name: 'photos',
       component: () => import('../views/PhotosView.vue')
+    },
+    {
+      path: '/instagram',
+      beforeEnter() {
+        location.href = 'http://www.instagram.com/plesk0t'
+      },
+      component: () => null
     }
   ]
 })

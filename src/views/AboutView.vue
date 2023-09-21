@@ -1,12 +1,24 @@
+<script setup>
+import { computed } from 'vue'
+import { useBreakpoints } from '../helpers/breakpoints'
+
+const { isSmallScreen } = useBreakpoints()
+
+const cols = computed(() => {
+  return isSmallScreen.value ? '12' : '6'
+})
+</script>
+
+
 <template>
   <v-container>
     <v-row align="center">
-      <v-col>
-        <v-img src="../src/assets/photos/IMG_8939.jpg" max-width="500"></v-img>
+      <v-col :cols="cols">
+        <v-img src="../src/assets/photos/profile.jpg" max-width="500" class="mx-auto"></v-img>
       </v-col>
-      <v-col>
+      <v-col :cols="cols">
         <p class="text-h3 font-weight-bold">ABOUT</p>
-        <p class="text-subtitle-1">
+        <p class="text-subtitle-1 font-italic">
           It is a long established fact that a reader will be distracted by the readable content of
           a page when looking at its layout. The point of using Lorem Ipsum is that it has a
           more-or-less normal distribution of letters, as opposed to using 'Content here, content

@@ -2,12 +2,9 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { computed, ref } from 'vue'
 import router from './router'
-import { useDisplay } from 'vuetify'
+import { useBreakpoints } from './helpers/breakpoints'
 
-const { xs, sm } = useDisplay()
-const isSmallScreen = computed(() => {
-  return xs.value || sm.value
-})
+const { isSmallScreen } = useBreakpoints()
 
 const navDrawer = ref(false)
 const links = ref([
@@ -22,7 +19,6 @@ function onNavigationDrawerButtonClick() {
 function goTo(path: string) {
   router.push(path)
 }
-
 </script>
 
 <template>
@@ -50,15 +46,36 @@ function goTo(path: string) {
         <v-spacer />
       </v-row>
       <template #append>
-        <v-app-bar-nav-icon v-if="isSmallScreen" @click="onNavigationDrawerButtonClick"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon
+          icon="mdi-instagram"
+          href="https://www.instagram.com/plesk0t"
+        ></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon
+          v-if="isSmallScreen"
+          @click="onNavigationDrawerButtonClick"
+        ></v-app-bar-nav-icon>
       </template>
     </v-app-bar>
     <v-main> <router-view> </router-view> </v-main>
-    <v-navigation-drawer v-model="navDrawer" location="right" :disable-resize-watcher="true" floating>
+    <v-navigation-drawer
+      v-model="navDrawer"
+      location="right"
+      :disable-resize-watcher="true"
+      floating
+    >
       <v-list-item v-for="link in links" :key="link.name">
-        <span @click="goTo(link.to)" class="text-button font-weight-bold nav-link"> {{ link.name }} </span>
+        <span @click="goTo(link.to)" class="text-button font-weight-bold nav-link">
+          {{ link.name }}
+        </span>
       </v-list-item>
     </v-navigation-drawer>
+
+    <v-footer class="text-center d-flex flex-column">
+      <div>
+        <span class="text-caption text-grey-darken-1"> © Michał Pleskowicz 2023 </span>
+      </div>
+      <v-divider></v-divider>
+    </v-footer>
   </v-app>
 </template>
 
