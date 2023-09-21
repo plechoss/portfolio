@@ -14,7 +14,7 @@ const cols = computed(() => {
   <v-container>
     <v-row align="center">
       <v-col :cols="cols">
-        <v-img src="/assets/photos/profile.jpg" max-width="500" class="mx-auto"></v-img>
+        <v-img src="/assets/profile.jpg" max-width="500" class="mx-auto"></v-img>
       </v-col>
       <v-col :cols="cols">
         <p class="text-h3 font-weight-bold">ABOUT</p>
