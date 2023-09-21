@@ -1,85 +1,57 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { computed, ref } from 'vue'
+import router from './router'
+import { useDisplay } from 'vuetify'
+const { name } = useDisplay()
+
+const navDrawer = ref(false)
+const links = ref([
+  { name: 'photos', to: '/photos' },
+  { name: 'about', to: '/about' }
+])
+
+function onNavigationDrawerButtonClick() {
+  navDrawer.value = !navDrawer.value
+}
+
+function goTo(path: string) {
+  router.push(path)
+}
+
+const breakpoint = computed(() => {
+  return name.value
+})
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <v-app>
+    <v-main> </v-main>
+  </v-app>
+  <v-app-bar density="compact">
+    <v-spacer />
+    <span @click="goTo('/photos')" class="text-button font-weight-bold text-grey-darken-2 nav-link"
+      >PHOTOS</span
+    >
+    <v-toolbar-title class="flex text-center">
+      <v-span @click="goTo('/photos')" class="text-h5 nav-link"> MICHAŁ PLESKOWICZ </v-span>
+    </v-toolbar-title>
+    <span @click="goTo('/about')" class="text-button text-grey-darken-2 font-weight-bold nav-link"
+      >ABOUT</span
+    >
+    <v-spacer />
+    <template #append>
+      <v-app-bar-nav-icon dark @click="onNavigationDrawerButtonClick"></v-app-bar-nav-icon>
+    </template>
+  </v-app-bar>
+  <router-view></router-view>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.nav-link:hover {
+  cursor: pointer;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+img {
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
 }
 </style>
