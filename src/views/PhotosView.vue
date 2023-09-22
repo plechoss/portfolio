@@ -16,6 +16,7 @@ const cols = computed(() => {
 const numPhotosPerCol = computed(() => {
   return Math.floor(numPhotos.value * cols.value / 12)
 })
+
 </script>
 
 <template>
@@ -36,7 +37,7 @@ const numPhotosPerCol = computed(() => {
               transition="fade-transition"
               class="pr-1 pb-1 pt-0 pl-0"
             >
-              <v-img :src="`assets/${i.toString().padStart(4, '0')}.jpg`"></v-img>
+              <v-img :src="`/${i.toString().padStart(4, '0')}.jpg`"></v-img>
             </v-lazy>
           </v-col>
         </v-row>
