@@ -14,6 +14,10 @@ const router = createRouter({
       path: '/photos',
       name: 'photos',
       component: PhotosViewVue
+    },
+    {
+      path: '*',
+      redirect: '/photos'
     }
   ]
 })
