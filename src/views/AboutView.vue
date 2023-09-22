@@ -27,6 +27,8 @@ const cols = computed(() => {
           will uncover many web sites still in their infancy. Various versions have evolved over the
           years, sometimes by accident, sometimes on purpose (injected humour and the like).
         </p>
+
+        <p class="text-subtitle-1 font-italic">Bookings: michal.pleskowicz@gmail.com</p>
       </v-col>
     </v-row>
   </v-container>
