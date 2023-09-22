@@ -16,7 +16,7 @@ const router = createRouter({
       component: PhotosViewVue
     },
     {
-      path: '*',
+      path: '/:catchAll(.*)',
       redirect: '/photos'
     }
   ]
