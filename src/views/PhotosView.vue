@@ -37,7 +37,7 @@ const numPhotosPerCol = computed(() => {
               transition="fade-transition"
               class="pr-1 pb-1 pt-0 pl-0"
             >
-              <v-img :src="`${i.toString().padStart(4, '0')}.jpg`"></v-img>
+              <v-img :src="`small-${i.toString().padStart(2, '0')}.jpg`"></v-img>
             </v-lazy>
           </v-col>
         </v-row>
