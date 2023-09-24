@@ -24,9 +24,9 @@ const numPhotosPerCol = computed(() => {
     <v-row class="pt-0 mt-0">
       <v-col v-for="colIdx in Array(12 / cols).keys()" :key="`col${colIdx}`" class="ma-0 pa-0" :cols="cols">
         <v-row
-          v-for="i in Array(numPhotosPerCol)
-            .fill(colIdx * numPhotosPerCol + 1)
-            .map((x, y) => x + y)"
+          v-for="i in Array(numPhotosPerCol + 1)
+            .fill(colIdx + 1)
+            .map((x, y) => x + 12 / cols * y)"
           :key="i"
           no-gutters
         >
