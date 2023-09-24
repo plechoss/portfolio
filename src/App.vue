@@ -8,7 +8,7 @@ const { isSmallScreen } = useBreakpoints()
 
 const navDrawer = ref(false)
 const links = ref([
-  { name: 'photos', to: '/photos' },
+  { name: 'photos', to: '/' },
   { name: 'about', to: '/about' }
 ])
 
@@ -28,13 +28,13 @@ function goTo(path: string) {
         <v-spacer v-if="!isSmallScreen" />
         <v-col v-if="!isSmallScreen">
           <span
-            @click="goTo('/photos')"
+            @click="goTo('/')"
             class="text-caption font-weight-bold text-grey-darken-2 nav-link"
             >PHOTOS</span
           >
         </v-col>
         <v-col :class="isSmallScreen ? 'text-left' : ''">
-          <span @click="goTo('/photos')" class="text-h6 nav-link"> PLESKOWICZ </span>
+          <span @click="goTo('/')" class="text-h6 nav-link"> PLESKOWICZ </span>
         </v-col>
         <v-col v-if="!isSmallScreen">
           <span
