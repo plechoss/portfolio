@@ -46,7 +46,18 @@ function previousPhoto() {
 <template>
   <v-overlay :model-value="isOpen" class="align-center justify-center">
     <v-container id="top-container" fluid>
-      <v-row align="center" class="fill-height">
+      <v-row align="center" class="my-0 py-0" style="z-index: 2 !important">
+        <v-spacer />
+        <v-col cols="1" class="my-0 py-0 text-left">
+          <v-icon
+            icon="mdi-close"
+            @click="$emit('closeGallery')"
+            size="x-large"
+            color="#000000"
+          ></v-icon>
+        </v-col>
+      </v-row>
+      <v-row align="center" class="fill-height pt-0 mt-0">
         <v-col cols="1" class="text-right nav-column" @click="previousPhoto">
           <v-row align="center" class="fill-height">
             <v-col>
@@ -54,15 +65,19 @@ function previousPhoto() {
             </v-col>
           </v-row>
         </v-col>
-        <v-col :key="currentIndex">
-          <v-img
-            :src="`${currentIndex.toString().padStart(4, '0')}.jpg`"
-            :max-height="'85vh'"
-            :max-width="'80vw'"
-          >
-          </v-img>
+        <v-col :key="currentIndex" style="height: 100% !important">
+          <v-row align="center" class="fill-height">
+            <v-col>
+              <v-img
+                :src="`${currentIndex.toString().padStart(4, '0')}.jpg`"
+                :max-height="'85vh'"
+                :max-width="'80vw'"
+              >
+              </v-img>
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col cols="1" class="text-left nav-column align-center" @click="nextPhoto">
+        <v-col cols="1" class="text-left nav-column" @click="nextPhoto">
           <v-row align="center" class="fill-height">
             <v-col>
               <v-icon icon="mdi-greater-than" size="x-large" color="#000000"></v-icon>
@@ -70,13 +85,6 @@ function previousPhoto() {
           </v-row>
         </v-col>
       </v-row>
-      <v-icon
-        id="close-icon"
-        icon="mdi-close"
-        @click="$emit('closeGallery')"
-        size="x-large"
-        color="#000000"
-      ></v-icon>
     </v-container>
   </v-overlay>
 </template>
@@ -95,14 +103,12 @@ function previousPhoto() {
   height: 100vh !important;
 }
 
-#close-icon {
-  position: absolute;
-  top: 40px;
-  right: 56px;
-}
-
 .nav-column {
   cursor: pointer;
   height: 100% !important;
+}
+
+#blank-icon {
+  opacity: 0 !important;
 }
 </style>
