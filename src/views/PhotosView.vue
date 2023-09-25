@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useDisplay } from 'vuetify'
+import PhotoGallery from '@/components/PhotoGallery.vue'
 
 const { xs, sm, md } = useDisplay()
 
@@ -14,19 +15,36 @@ const cols = computed(() => {
 })
 
 const numPhotosPerCol = computed(() => {
-  return Math.floor(numPhotos.value * cols.value / 12)
+  return Math.floor((numPhotos.value * cols.value) / 12)
 })
 
+const isGalleryOpen = ref(false)
+const galleryIndex = ref(0)
+
+function openGallery(i: number) {
+  console.log('opening gallery')
+  galleryIndex.value = i
+  isGalleryOpen.value = true
+}
+
+function closeGallery() {
+  isGalleryOpen.value = false
+}
 </script>
 
 <template>
   <v-container fluid class="pt-0 mt-0">
     <v-row class="pt-0 mt-0">
-      <v-col v-for="colIdx in Array(12 / cols).keys()" :key="`col${colIdx}`" class="ma-0 pa-0" :cols="cols">
+      <v-col
+        v-for="colIdx in Array(12 / cols).keys()"
+        :key="`col${colIdx}`"
+        class="ma-0 pa-0"
+        :cols="cols"
+      >
         <v-row
           v-for="i in Array(numPhotosPerCol + 1)
             .fill(colIdx + 1)
-            .map((x, y) => x + 12 / cols * y)"
+            .map((x, y) => x + (12 / cols) * y)"
           :key="i"
           no-gutters
         >
@@ -37,11 +55,27 @@ const numPhotosPerCol = computed(() => {
               transition="fade-transition"
               class="pr-1 pb-1 pt-0 pl-0"
             >
-              <v-img :src="`small-${i.toString().padStart(2, '0')}.jpg`"></v-img>
+              <v-img
+                :src="`small-${i.toString().padStart(2, '0')}.jpg`"
+                @click="openGallery(i)"
+              ></v-img>
             </v-lazy>
           </v-col>
         </v-row>
       </v-col>
     </v-row>
   </v-container>
+
+  <photo-gallery
+    :is-open="isGalleryOpen"
+    :starting-index="galleryIndex"
+    :num-photos="numPhotos"
+    @close-gallery="closeGallery"
+  ></photo-gallery>
 </template>
+
+<style scoped>
+.v-img:hover {
+  cursor: pointer !important;
+}
+</style>
