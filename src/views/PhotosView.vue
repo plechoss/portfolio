@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useDisplay } from 'vuetify'
+import { useBreakpoints } from '../helpers/breakpoints'
+
 import PhotoGallery from '@/components/PhotoGallery.vue'
 
+const { isSmallScreen } = useBreakpoints()
 const { xs, sm, md } = useDisplay()
+const imgClass = computed(() => {
+  return isSmallScreen.value ? 'small-screen' : ''
+})
 
 const numPhotos = ref(47)
 
@@ -22,6 +28,7 @@ const isGalleryOpen = ref(false)
 const galleryIndex = ref(0)
 
 function openGallery(i: number) {
+  if (xs.value) return
   console.log('opening gallery')
   galleryIndex.value = i
   isGalleryOpen.value = true
@@ -57,6 +64,7 @@ function closeGallery() {
             >
               <v-img
                 :src="`small-${i.toString().padStart(2, '0')}.jpg`"
+                :class="imgClass"
                 @click="openGallery(i)"
               ></v-img>
             </v-lazy>
@@ -65,17 +73,18 @@ function closeGallery() {
       </v-col>
     </v-row>
   </v-container>
-
-  <photo-gallery
-    :is-open="isGalleryOpen"
-    :starting-index="galleryIndex"
-    :num-photos="numPhotos"
-    @close-gallery="closeGallery"
-  ></photo-gallery>
+  <template v-if="!xs">
+    <photo-gallery
+      :is-open="isGalleryOpen"
+      :starting-index="galleryIndex"
+      :num-photos="numPhotos"
+      @close-gallery="closeGallery"
+    ></photo-gallery>
+  </template>
 </template>
 
 <style scoped>
-.v-img:hover {
+.v-img:not(.small-screen):hover {
   cursor: pointer !important;
 }
 </style>
