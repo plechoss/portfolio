@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useDisplay } from 'vuetify'
-import { useBreakpoints } from '../helpers/breakpoints'
 
 import PhotoGallery from '@/components/PhotoGallery.vue'
 
-const { isSmallScreen } = useBreakpoints()
 const { xs, sm, md } = useDisplay()
 const imgClass = computed(() => {
-  return isSmallScreen.value ? 'small-screen' : ''
+  return xs.value ? 'small-screen' : ''
 })
 
 const numPhotos = ref(47)

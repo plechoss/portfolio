@@ -46,7 +46,7 @@ function previousPhoto() {
 <template>
   <v-overlay :model-value="isOpen" class="align-center justify-center">
     <v-container id="top-container" fluid>
-      <v-row align="center" class="my-0 py-0" style="z-index: 2 !important">
+      <v-row align="center" class="my-1 py-0" style="z-index: 2 !important">
         <v-spacer />
         <v-col cols="1" class="my-0 py-0 text-left">
           <v-icon
@@ -58,16 +58,16 @@ function previousPhoto() {
         </v-col>
       </v-row>
       <v-row align="center" class="fill-height pt-0 mt-0">
-        <v-col cols="1" class="text-right nav-column" @click="previousPhoto">
+        <v-col cols="1" class="text-right nav-column py-0" @click="previousPhoto">
           <v-row align="center" class="fill-height">
             <v-col>
               <v-icon icon="mdi-less-than" size="x-large" color="#000000"></v-icon>
             </v-col>
           </v-row>
         </v-col>
-        <v-col :key="currentIndex" style="height: 100% !important">
+        <v-col :key="currentIndex" style="height: 100% !important" class="py-0">
           <v-row align="center" class="fill-height">
-            <v-col>
+            <v-col class="py-0">
               <v-img
                 :src="`${currentIndex.toString().padStart(4, '0')}.jpg`"
                 :max-height="'85vh'"
@@ -77,7 +77,7 @@ function previousPhoto() {
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="1" class="text-left nav-column" @click="nextPhoto">
+        <v-col cols="1" class="text-left nav-column py-0" @click="nextPhoto">
           <v-row align="center" class="fill-height">
             <v-col>
               <v-icon icon="mdi-greater-than" size="x-large" color="#000000"></v-icon>
