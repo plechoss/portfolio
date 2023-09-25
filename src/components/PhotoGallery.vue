@@ -47,13 +47,12 @@ function previousPhoto() {
   <v-overlay :model-value="isOpen" class="align-center justify-center">
     <v-container id="top-container" fluid>
       <v-row align="center" class="fill-height">
-        <v-col cols="1" class="text-right">
-          <v-icon
-            icon="mdi-less-than"
-            @click="previousPhoto"
-            size="x-large"
-            color="#000000"
-          ></v-icon>
+        <v-col cols="1" class="text-right nav-column" @click="previousPhoto">
+          <v-row align="center" class="fill-height">
+            <v-col>
+              <v-icon icon="mdi-less-than" size="x-large" color="#000000"></v-icon>
+            </v-col>
+          </v-row>
         </v-col>
         <v-col :key="currentIndex">
           <v-img
@@ -63,13 +62,12 @@ function previousPhoto() {
           >
           </v-img>
         </v-col>
-        <v-col cols="1" class="text-left">
-          <v-icon
-            icon="mdi-greater-than"
-            @click="nextPhoto"
-            size="x-large"
-            color="#000000"
-          ></v-icon>
+        <v-col cols="1" class="text-left nav-column align-center" @click="nextPhoto">
+          <v-row align="center" class="fill-height">
+            <v-col>
+              <v-icon icon="mdi-greater-than" size="x-large" color="#000000"></v-icon>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
       <v-icon
@@ -101,5 +99,10 @@ function previousPhoto() {
   position: absolute;
   top: 40px;
   right: 56px;
+}
+
+.nav-column {
+  cursor: pointer;
+  height: 100% !important;
 }
 </style>
