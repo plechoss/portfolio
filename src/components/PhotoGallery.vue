@@ -45,8 +45,8 @@ function previousPhoto() {
 
 <template>
   <v-overlay :model-value="isOpen" class="align-center justify-center">
-    <v-container id="top-container" fluid>
-      <v-row align="center" class="my-1 py-0" style="z-index: 2 !important">
+    <v-container id="top-container" fluid class="pt-0">
+      <v-row align="center" class="my-1 pt-3 pb-0" style="z-index: 2 !important">
         <v-spacer />
         <v-col cols="1" class="my-0 py-0 text-left">
           <v-icon
@@ -57,7 +57,7 @@ function previousPhoto() {
           ></v-icon>
         </v-col>
       </v-row>
-      <v-row align="center" class="fill-height pt-0 mt-0">
+      <v-row align="center" class="fill-height pt-0 pb-16 mt-0">
         <v-col cols="1" class="text-right nav-column py-0" @click="previousPhoto">
           <v-row align="center" class="fill-height">
             <v-col>
@@ -70,7 +70,7 @@ function previousPhoto() {
             <v-col class="py-0">
               <v-img
                 :src="`${currentIndex.toString().padStart(4, '0')}.jpg`"
-                :max-height="'85vh'"
+                :max-height="'80vh'"
                 :max-width="'80vw'"
               >
               </v-img>
@@ -91,7 +91,7 @@ function previousPhoto() {
 <style>
 .v-overlay__content {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 .v-overlay__scrim {
